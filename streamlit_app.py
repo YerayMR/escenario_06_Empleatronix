@@ -18,13 +18,13 @@ col1, col2, col3 = st.columns(3)
 
 # Seleccionar color para las barras
 with col1:
-    bar_color = st.color_picker("Pick A Color", "#6DF7FD")
+  bar_color = st.color_picker("Pick A Color", "#6DF7FD")
 
 # Configurar si mostrar el nombre o el sueldo
 with col2:
-    show_names = st.checkbox('Mostrar el nombre', value=True)
+  show_names = st.checkbox('Mostrar el nombre', value=True)
 with col3:
-    show_salary = st.checkbox('Mostrar sueldo en la barra')
+  show_salary = st.checkbox('Mostrar sueldo en la barra')
 
 # Crear gráfico de barras
 fig, ax = plt.subplots(figsize=(10, 6))
@@ -35,11 +35,14 @@ ax.barh(df['full name'], df['salary'], color=bar_color)
 # Añadir etiquetas de salario o nombre según la selección
 if show_salary:
   for i, v in enumerate(df['salary']):
-      ax.text(v + 50, i, f'{v}', va='center', ha='left', color='black', fontweight='bold')
+    ax.text(v + 50, i, f'{v}', va='center', ha='left', color='black', fontweight='bold')
 
 if show_names == False:
   # Si no se selecciona "Mostrar el nombre", ocultamos los nombres del eje Y
   ax.set_yticklabels([''] * len(df))  # Elimina los nombres del eje Y
+
+# Ajustar límites del eje X para que se muestren hasta 4500
+ax.set_xlim(0, 4500)
 
 # Configuración del gráfico
 ax.set_xlabel('Sueldo ($)')
