@@ -22,7 +22,7 @@ with col1:
 
 # Configurar si mostrar el nombre o el sueldo
 with col2:
-    show_names = st.checkbox('Mostrar el nombre')
+    show_names = st.checkbox('Mostrar el nombre', value=True)
 with col3:
     show_salary = st.checkbox('Mostrar sueldo en la barra')
 
@@ -34,16 +34,12 @@ ax.barh(df['full name'], df['salary'], color=bar_color)
 
 # Añadir etiquetas de salario o nombre según la selección
 if show_salary:
-    for i, v in enumerate(df['salary']):
-        ax.text(v + 50, i, f'{v}', va='center', ha='left', color='black', fontweight='bold')
+  for i, v in enumerate(df['salary']):
+      ax.text(v + 50, i, f'{v}', va='center', ha='left', color='black', fontweight='bold')
 
-if show_names:
-    # Mostrar los nombres en el gráfico
-    for i, v in enumerate(df['full name']):
-        ax.text(-100, i, v, va='center', ha='right', color='black', fontweight='bold')
-else:
-    # Si no se selecciona "Mostrar el nombre", ocultamos los nombres del eje Y
-    ax.set_yticklabels([''] * len(df))  # Elimina los nombres del eje Y
+if show_names == False:
+  # Si no se selecciona "Mostrar el nombre", ocultamos los nombres del eje Y
+  ax.set_yticklabels([''] * len(df))  # Elimina los nombres del eje Y
 
 # Configuración del gráfico
 ax.set_xlabel('Sueldo ($)')
